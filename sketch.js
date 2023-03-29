@@ -8,7 +8,7 @@ let osc6;
 let waveform;
 let stopAnimation = false;
 let randomValue = Math.random()*17;
-let colors = ["#CFB3FF", "#CEB3FF", "#071FFF", "##FFB7FF", "#FFF603", "#9DE1A4", '#FFC1FC','#F2A6E3','#ADF7E2','#0497FE','#fefe99','#39FF14',' #002199']; // array of color codes
+let colors = ["#CFB3FF", "#CEB3FF", "#071FFF", "##FFB7FF", "#FFF603", "#9DE1A4", '#FFC1FC','#F2A6E3','#ADF7E2','#0497FE','#fefe99','#39FF14',' #002199','#B0C4DE','#E68DAA','#EAA8F0','#0184D4','#F3001B','#FDD87E','#D4FF57','#9C81EB','#FF5DDA','#9F8BDD','#CAD3FE']; 
 
 //-------------------------------------------------------------//
 function setup() {
@@ -87,7 +87,7 @@ function draw() {
   
   if (ready) {
     // our main sketch is ready
-    if (millis() < 500) {
+    if (millis() < 600) {
       background(0, 0);
       clear();
       // randomly choose whether stroke is dotted or connected
@@ -121,28 +121,35 @@ function draw() {
       clear();
       beginShape();
       clear();
-      vertex(0, 0); // top-left
+  
       for (let i = start; i < end; i++) {
-        let x = map(i, start, end, 0, width);
-        let y = map(buffer[i], -1, .01, 0, height);
+        let x = map(i, start, end, randomValue, width);
+        let y = map(buffer[i], -1, .07, randomValue, height);
       
         // randomly draw connected or dotted line
         if (isDotted) {
-          if (i % 4 === 0) {
+          if (i % randomValue === 0) {
             // gap between dots
             beginShape();
             endShape();
             ellipseMode(CORNER);
-            ellipse(x,y);
+            quad(x,y);
             arc(x,y);
+            ellipse(x,y);
             vertex(x,y);
+            // square(x,y)
+            // triangle(x,y)  
             
           } else {
             // draw dot
             point(x, y);
             ellipseMode(CORNER);
+            //    quad(x,y);
+            // arc(x,y);
             ellipse(x,y);
             vertex(x,y);
+            //  square(x,y)
+            // triangle(x,y)  
           }
         } else {
           // draw connected line
@@ -158,8 +165,8 @@ function draw() {
           }
         }
       }
-      
-      // vertex(width, 0); // top-right
+      vertex(0, 0); // top-left
+      vertex(width, 0); // top-right
       vertex(width, height); // bottom-right
       vertex(0, height); // bottom-left
       endShape(CLOSE);
