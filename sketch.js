@@ -13,7 +13,7 @@ let colors = ["#CFB3FF", "#CEB3FF", "#071FFF", "##FFB7FF", "#FFF603", "#9DE1A4",
 //-------------------------------------------------------------//
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+
 }
 
 //-------------------------------------------------------------//
@@ -87,7 +87,7 @@ function draw() {
   
   if (ready) {
     // our main sketch is ready
-    if (millis() < 600) {
+    if (millis() < 1800) {
       background(0, 0);
       clear();
       // randomly choose whether stroke is dotted or connected
@@ -178,6 +178,10 @@ function draw() {
   } else {
     background('white');
     fill(colors[Math.floor(Math.random() * colors.length)]);
+    textAlign(CENTER, CENTER);
+    textSize(32);
+    text('Click to start, refresh to start over', width / 2, height / 2);
+    
     // blendMode(DIFFERENCE,EXCLUSION );
   }
 }
