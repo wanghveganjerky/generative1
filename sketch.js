@@ -13,7 +13,6 @@ let colors = ["#CFB3FF", "#CEB3FF", "#071FFF", "##FFB7FF", "#FFF603", "#9DE1A4",
 //-------------------------------------------------------------//
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
 }
 
 //-------------------------------------------------------------//
@@ -26,8 +25,9 @@ function mousePressed() {
 
 //-------------------------------------------------------------//
 function initializeAudio() {
+  let oscType = ['sine', 'triangle', 'square', 'sawtooth'];
   osc = new Tone.Oscillator();
-  osc.type = 'sine17'; // change sine to sine9 would change visuals,
+  osc.type = oscType[Math.floor(Math.random() * oscType.length)]; // randomly select an oscillator type
   osc.frequency.value = 12*randomValue; // this is pitch in hertz(hz)        // this value could be random
   osc.start();
   osc.toDestination(); // connect oscillator to the audio output
@@ -77,9 +77,7 @@ function initializeAudio() {
   wave5 = new Tone.Waveform();
   wave6 = new Tone.Waveform();
   Tone.Master.connect(waveform);
-  Tone.Master.volume.value = 7/randomValue; // -9 decibles       // this value could be random
-
-  let oscType = ['sine', 'triangle', 'square', 'sawtooth'];
+  Tone.Master.volume.value = -7/randomValue; // -9 decibles       // this value could be random
 }
 
 //-------------------------------------------------------------//
@@ -179,22 +177,12 @@ function draw() {
     background('white');
     fill(colors[Math.floor(Math.random() * colors.length)]);
     textAlign(CENTER, CENTER);
-    textSize(32);
-    text('Click to start, refresh to start over', width / 2, height / 2);
-    
+    textSize(28);
+    text('Press anywhere to start', width / 2, height / 2 - 15); // first line
+    text('Refresh to start over', width / 2, height / 2 + 15); 
     // blendMode(DIFFERENCE,EXCLUSION );
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 //-------------------------------------------------------------//
 
@@ -241,11 +229,6 @@ function draw() {
 //     text('click me !', width / 2, height / 2);
 //   }
 // }
-
-
-
-
-
 
 
 // function draw() {
